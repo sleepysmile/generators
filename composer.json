@@ -1,0 +1,36 @@
+{
+    "name": "roman/generators",
+    "version": "1.0",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Roma.Ost",
+            "email": "ostdevops@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.0|>=8.0",
+        "illuminate/support": "8.x-dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Generators\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.23",
+        "phpunit/phpunit": "9.5.*"
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@php ./vendor/bin/testbench package:discover --ansi"
+        ]
+    }
+}

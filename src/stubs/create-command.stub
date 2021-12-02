@@ -1,0 +1,35 @@
+<?php
+
+namespace DummyNamespace;
+
+use DummyRootNamespaceMedia\Shared\BaseCommand;
+
+/**
+ * @property string     $name
+ * @property string     $link
+ * @property string     $publication_date
+ */
+class CreateDummyClassCommand extends BaseCommand
+{
+    {{property}}
+    protected ?string   $name = null;
+    protected string    $link;
+    protected ?string   $publication_date = null;
+
+    protected function rules(): array
+    {
+        return [
+            "name"              => "nullable|string|min:1|max:1024",
+            "link"              => "required|string|min:1|max:1024",
+            "publication_date"  => "nullable|date_format:Y-m-d",
+        ];
+    }
+
+    protected function filters(): array
+    {
+        return [
+            "name" => "trim|strip_tags",
+            "link" => "trim|strip_tags",
+        ];
+    }
+}

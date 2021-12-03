@@ -4,7 +4,7 @@ namespace Generators\Commands;
 
 use Generators\Abstracts\BaseContractCommand;
 
-class CreateContractCommand extends BaseContractCommand
+class CreateCreateContractCommand extends BaseContractCommand
 {
     protected $signature = 'generators:create-command
         {name : Class name}
@@ -17,7 +17,7 @@ class CreateContractCommand extends BaseContractCommand
      */
     protected function getStub()
     {
-        return __DIR__ . '/../stubs/contract-command.stub';
+        return __DIR__ . '/../stubs/create-contract-command.stub';
     }
 
 }

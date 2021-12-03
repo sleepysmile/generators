@@ -4,9 +4,8 @@ namespace Tests;
 
 use Generators\Providers\GeneratorServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Orchestra\Testbench\TestCase as OtchestraTestCase;
 
-abstract class TestCase extends OtchestraTestCase
+abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
     use RefreshDatabase;
 

@@ -1,0 +1,22 @@
+<?php
+
+namespace DummyNamespace;
+
+use DummyRootNamespaceMedia\Shared\BaseCommand;
+
+/**
+ * {{docblock}}
+ */
+class DummyClass extends BaseCommand
+{
+    {{property}}
+    protected function rules(): array
+    {
+        return {{rules}};
+    }
+
+    protected function filters(): array
+    {
+        return {{filters}};
+    }
+}

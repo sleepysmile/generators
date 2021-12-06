@@ -2,30 +2,42 @@
 
 namespace Generators\Abstracts;
 
+use Illuminate\Database\Eloquent\Model;
+
 abstract class BaseContractCommand extends BaseGeneratorCommand
 {
     protected function buildClass($name)
     {
         $stub = $this->files->get($this->getStub());
+        $properties = $this->getProperty();
 
         return $this->replaceNamespace($stub, $name)
-            ->replaceProperty($stub)
-            ->replaceDocblock($stub)
-            ->replaceRules($stub)
+            ->replaceProperty($stub, $properties)
+            ->replaceDocblock($stub, $properties)
+            ->replaceRules($stub, $properties)
             ->replaceFilters($stub)
             ->replaceClass($stub, $name);
     }
 
-    protected function getNameInput()
+    protected function replaceRules(&$stub, array $properties): self
     {
-        return 'Create' . parent::getNameInput() . 'Command';
-    }
+        $isEmpty = ($properties === []);
 
-    protected function replaceRules(&$stub): self
-    {
+        $replace = '';
+
+        if (!$isEmpty) {
+            $replace .= '[' . PHP_EOL;
+
+            foreach ($properties as $name => $property) {
+                $replace .= "\t\t\t\"$name\" => \"\"" . ',' . PHP_EOL;
+            }
+
+            $replace .= "\t\t]";
+        }
+
         $stub = str_replace(
             '{{rules}}',
-            '[]',
+            $replace,
             $stub
         );
 

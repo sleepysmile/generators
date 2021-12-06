@@ -4,49 +4,10 @@ namespace Generators\Abstracts;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseGeneratorCommand extends GeneratorCommand
 {
-//    protected function getModelColumn()
-//    {
-//        $modelInstance = $this->getModelInstance();
-//        $database = null;
-//        if (strpos($table, '.')) {
-//            [$database, $table] = explode('.', $table);
-//        }
-//
-//        return ($modelInstance === null)
-//            ? []
-//            : $modelInstance
-//                ->getConnection()
-//                ->getDoctrineSchemaManager()
-//                ->listTableColumns($this->getModelTable());
-//    }
-
-//    protected function getModelTable()
-//    {
-//        $modelInstance = $this->getModelInstance();
-//
-//        return ($modelInstance === null)
-//            ? ''
-//            : $modelInstance
-//                ->getConnection()
-//                ->getTablePrefix()
-//            . $modelInstance
-//                ->getTable();
-//    }
-
-//    protected function getModelInstance(): ?Model
-//    {
-//        $modelName = $this->argument('model');
-//
-//        if ($modelName === null) {
-//            return null;
-//        }
-//
-//        return (new $modelName);
-//    }
-
     protected function alreadyExists($rawName)
     {
         if ($this->options('force')) {
@@ -71,26 +32,80 @@ abstract class BaseGeneratorCommand extends GeneratorCommand
             ->replaceClass($stub, $name);
     }
 
-    protected function replaceProperty(&$stub): self
+    protected function replaceProperty(&$stub, array $properties = []): self
     {
+        $isEmpty = ($properties === []);
+
+        $replace = '';
+
+        if (!$isEmpty) {
+            $lastKey = array_key_last($properties);
+            foreach ($properties as $name => $property) {
+                $replace .= "\tprotected \$$name;" . PHP_EOL;
+                // TODO add type caster
+                if ($lastKey !== $name) {
+                    $replace .=  PHP_EOL;
+                }
+            }
+        }
+
         $stub = str_replace(
             '{{property}}',
-            '',
+            $replace,
             $stub
         );
 
         return $this;
     }
 
-    protected function replaceDocblock(&$stub): self
+    protected function replaceDocblock(&$stub, array $properties = []): self
     {
+        $isEmpty = ($properties === []);
+
+        $replace = '';
+
+        if (!$isEmpty) {
+            $lastKey = array_key_last($properties);
+            foreach ($properties as $name => $property) {
+                $replace .= " * @property \$$name";
+                // TODO add type caster
+                if ($lastKey !== $name) {
+                    $replace .= PHP_EOL;
+                }
+            }
+        }
+
         $stub = str_replace(
             '{{docblock}}',
-            '',
+            $replace,
             $stub
         );
 
         return $this;
+    }
+
+    public function getProperty()
+    {
+        $modelName = $this->argument('model');
+
+        if ($modelName === null) {
+            return [];
+        }
+
+        /** @var Model $instanceModel */
+        $instanceModel = new $modelName();
+        $tableName = $instanceModel->getConnection()->getTablePrefix()
+            . $instanceModel->getTable();
+        $schema = $instanceModel->getConnection()->getDoctrineSchemaManager();
+
+        $database = null;
+        if (strpos($tableName, '.')) {
+            [$database, $tableName] = explode('.', $tableName);
+        }
+
+        $columns = $schema->listTableColumns($tableName, $database);
+
+        return $columns;
     }
 
 }

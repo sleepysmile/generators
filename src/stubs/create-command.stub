@@ -4,7 +4,8 @@ namespace DummyNamespace;
 
 class DummyClass
 {
-    public function handle({{commandclass}}$command){{modelnameType}}
+    public function handle({{commandclass}} $command){{modelnameType}}
     {
+{{modelinstruction}}
     }
 }

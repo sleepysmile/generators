@@ -8,6 +8,7 @@ class CreateCommandTest extends TestCase
     {
         $this->artisan('generators:create-create-command', [
             'name' => 'User',
+            'commandClass' => 'App\\CreateUserCommand'
         ]);
 
         $this->assertFileExists(app_path() . '/CreateUser.php');
@@ -17,7 +18,9 @@ class CreateCommandTest extends TestCase
     {
         $this->artisan('generators:create-create-command', [
             'name' => 'User',
-            'model' => 'Tests\\Models\\Users'
+            'model' => 'Tests\\Models\\Users',
+            'commandClass' => 'App\\CreateUserCommand',
+            '--force' => true
         ]);
 
         $this->assertFileExists(app_path() . '/CreateUser.php');

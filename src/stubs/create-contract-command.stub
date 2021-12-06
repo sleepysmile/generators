@@ -2,14 +2,12 @@
 
 namespace DummyNamespace;
 
-use DummyRootNamespaceMedia\Shared\BaseCommand;
-
 /**
- * {{docblock}}
+{{docblock}}
  */
-class DummyClass extends BaseCommand
+class DummyClass
 {
-    {{property}}
+{{property}}
     protected function rules(): array
     {
         return {{rules}};
@@ -19,4 +17,5 @@ class DummyClass extends BaseCommand
     {
         return {{filters}};
     }
+
 }

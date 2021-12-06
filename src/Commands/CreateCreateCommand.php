@@ -9,6 +9,7 @@ class CreateCreateCommand extends BaseCreateCommand
     protected $signature = 'generators:create-create-command
         {name : Class name}
         {model? : owner model}
+        {commandClass? : owner command}
         {--force : recreate class}
     ';
 
@@ -23,11 +24,12 @@ class CreateCreateCommand extends BaseCreateCommand
     protected function buildClass($name)
     {
         $stub = $this->files->get($this->getStub());
+        $properties = $this->getProperty();
 
         return $this->replaceNamespace($stub, $name)
             ->replaceCommandclass($stub)
             ->replaceModelnameType($stub)
-            ->replaceModelname($stub)
+            ->replaceModelinstruction($stub, $properties)
             ->replaceClass($stub, $name);
     }
 

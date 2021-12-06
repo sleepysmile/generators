@@ -4,7 +4,7 @@ namespace Generators\Commands;
 
 use Generators\Abstracts\BaseCreateCommand;
 
-class CreateUpdateCommand extends CreateCreateCommand
+class CreateUpdateCommand extends BaseCreateCommand
 {
     protected $signature = 'generators:create-update-command
         {name : Class name}
@@ -21,18 +21,6 @@ class CreateUpdateCommand extends CreateCreateCommand
     protected function getStub()
     {
         return __DIR__ . '/../stubs/update-command.stub';
-    }
-
-    protected function buildClass($name)
-    {
-        $stub = $this->files->get($this->getStub());
-        $properties = $this->getProperty();
-
-        return $this->replaceNamespace($stub, $name)
-            ->replaceCommandclass($stub)
-            ->replaceModelnameType($stub)
-            ->replaceModelinstruction($stub, $properties)
-            ->replaceClass($stub, $name);
     }
 
 }

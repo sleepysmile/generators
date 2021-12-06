@@ -2,9 +2,10 @@
 
 namespace Generators\Commands;
 
+use Generators\Abstracts\BaseContractCommand;
 use Generators\Abstracts\BaseCreateCommand;
 
-class CreateUpdateContractCommand extends BaseCreateCommand
+class CreateUpdateContractCommand extends BaseContractCommand
 {
     protected $signature = 'generators:create-update-contract
         {name : Class name}

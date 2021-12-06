@@ -13,24 +13,17 @@ class CreateCreateCommand extends BaseCreateCommand
         {--force : recreate class}
     ';
 
+    protected function getNameInput()
+    {
+        return 'Create' . parent::getNameInput();
+    }
+
     /**
      * @inheritDoc
      */
     protected function getStub()
     {
         return __DIR__ . '/../stubs/create-command.stub';
-    }
-
-    protected function buildClass($name)
-    {
-        $stub = $this->files->get($this->getStub());
-        $properties = $this->getProperty();
-
-        return $this->replaceNamespace($stub, $name)
-            ->replaceCommandclass($stub)
-            ->replaceModelnameType($stub)
-            ->replaceModelinstruction($stub, $properties)
-            ->replaceClass($stub, $name);
     }
 
 }

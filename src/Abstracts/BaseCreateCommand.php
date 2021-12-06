@@ -2,15 +2,8 @@
 
 namespace Generators\Abstracts;
 
-use App\CreateUserCommand;
-
 abstract class BaseCreateCommand extends BaseGeneratorCommand
 {
-    protected function getNameInput()
-    {
-        return 'Create' . parent::getNameInput();
-    }
-
     protected function replaceModelnameType(&$stub)
     {
         $stub = str_replace(
@@ -20,6 +13,18 @@ abstract class BaseCreateCommand extends BaseGeneratorCommand
         );
 
         return $this;
+    }
+
+    protected function buildClass($name)
+    {
+        $stub = $this->files->get($this->getStub());
+        $properties = $this->getProperty();
+
+        return $this->replaceNamespace($stub, $name)
+            ->replaceCommandclass($stub)
+            ->replaceModelnameType($stub)
+            ->replaceModelinstruction($stub, $properties)
+            ->replaceClass($stub, $name);
     }
 
     protected function replaceCommandclass(&$stub)

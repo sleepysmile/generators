@@ -1,0 +1,21 @@
+<?php
+
+namespace DummyNamespace;
+
+/**
+{{docblock}}
+ */
+class DummyClass
+{
+{{property}}
+    protected function rules(): array
+    {
+        return {{rules}};
+    }
+
+    protected function filters(): array
+    {
+        return {{filters}};
+    }
+
+}

@@ -3,7 +3,6 @@
 namespace Generators\Commands;
 
 use Generators\Abstracts\BaseContractCommand;
-use Illuminate\Support\Facades\Artisan;
 
 class CreateCreateContractCommand extends BaseContractCommand
 {

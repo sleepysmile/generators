@@ -10,7 +10,7 @@ class UpdateContractTest extends TestCase
             'name' => 'User',
         ]);
 
-        $this->assertFileExists(app_path() . '/CreateUserCommand.php');
+        $this->assertFileExists(app_path() . '/UpdateUserCommand.php');
     }
 
     public function test_crate_by_model_command()
@@ -21,7 +21,7 @@ class UpdateContractTest extends TestCase
             '--force' => true
         ]);
 
-        $this->assertFileExists(app_path() . '/CreateUserCommand.php');
+        $this->assertFileExists(app_path() . '/UpdateUserCommand.php');
     }
 
 }

@@ -11,7 +11,7 @@ class CreateCommandTest extends TestCase
             'commandClass' => 'App\\UpdateUserCommand',
         ]);
 
-        $this->assertFileExists(app_path() . '/CreateUserCommand.php');
+        $this->assertFileExists(app_path() . '/CreateUser.php');
     }
 
     public function test_crate_by_model_command()
@@ -23,7 +23,7 @@ class CreateCommandTest extends TestCase
             '--force' => true
         ]);
 
-        $this->assertFileExists(app_path() . '/CreateUserCommand.php');
+        $this->assertFileExists(app_path() . '/CreateUser.php');
     }
 
 }

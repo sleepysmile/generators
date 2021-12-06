@@ -6,23 +6,21 @@ class DeleteCommandTest extends TestCase
 {
     public function test_create_empty_command()
     {
-        $this->artisan('', [
+        $this->artisan('generators:create-delete-command', [
             'name' => 'User',
-            'commandClass' => 'App\\UpdateUserCommand',
         ]);
 
-        $this->assertFileExists(app_path() . '/CreateUserCommand.php');
+        $this->assertFileExists(app_path() . '/DeleteUser.php');
     }
 
     public function test_crate_by_model_command()
     {
-        $this->artisan('', [
+        $this->artisan('generators:create-delete-command', [
             'name' => 'User',
             'model' => 'Tests\\Models\\Users',
-            'commandClass' => 'App\\UpdateUserCommand',
             '--force' => true
         ]);
 
-        $this->assertFileExists(app_path() . '/CreateUserCommand.php');
+        $this->assertFileExists(app_path() . '/DeleteUser.php');
     }
 }

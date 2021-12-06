@@ -12,6 +12,11 @@ class CreateDeleteCommand extends BaseDeleteCommand
         {--force : recreate class}
     ';
 
+    protected function getNameInput()
+    {
+        return 'Delete' . parent::getNameInput();
+    }
+
     protected function getStub()
     {
         return __DIR__ . '/../stubs/delete-command.stub';

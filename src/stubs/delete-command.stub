@@ -4,7 +4,7 @@ namespace DummyNamespace;
 
 class DummyClass
 {
-    public function handle({{commandclass}} $item): void
+    public function handle({{modelclass}} $item): void
     {
         {{modelinstruction}}
     }

@@ -16,7 +16,7 @@ class DeleteCommandTest extends TestCase
     public function test_crate_by_model_command()
     {
         $this->artisan('generators:create-delete-command', [
-            'name' => 'User',
+            'name' => 'Models\\User',
             'model' => 'Tests\\Models\\Users',
             '--force' => true
         ]);
